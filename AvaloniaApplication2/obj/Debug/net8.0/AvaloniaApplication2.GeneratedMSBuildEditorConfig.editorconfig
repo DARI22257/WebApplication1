@@ -24,8 +24,14 @@ build_property.EnableCodeStyleSeverity =
 [/home/student/RiderProjects/WebApplication1/AvaloniaApplication2/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[/home/student/RiderProjects/WebApplication1/AvaloniaApplication2/Views/EmployeesView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [/home/student/RiderProjects/WebApplication1/AvaloniaApplication2/Views/LoginWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [/home/student/RiderProjects/WebApplication1/AvaloniaApplication2/Views/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/student/RiderProjects/WebApplication1/AvaloniaApplication2/Views/ShiftsView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
