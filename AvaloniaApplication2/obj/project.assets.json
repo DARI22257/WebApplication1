@@ -2,11 +2,11 @@
   "version": 3,
   "targets": {
     "net8.0": {
-      "Avalonia/11.3.4": {
+      "Avalonia/11.3.11": {
         "type": "package",
         "dependencies": {
-          "Avalonia.BuildServices": "0.0.31",
-          "Avalonia.Remote.Protocol": "11.3.4",
+          "Avalonia.BuildServices": "11.3.2",
+          "Avalonia.Remote.Protocol": "11.3.11",
           "MicroCom.Runtime": "0.11.0"
         },
         "compile": {
@@ -101,7 +101,7 @@
           }
         }
       },
-      "Avalonia.BuildServices/0.0.31": {
+      "Avalonia.BuildServices/11.3.2": {
         "type": "package",
         "build": {
           "buildTransitive/Avalonia.BuildServices.targets": {}
@@ -217,7 +217,7 @@
           }
         }
       },
-      "Avalonia.Remote.Protocol/11.3.4": {
+      "Avalonia.Remote.Protocol/11.3.11": {
         "type": "package",
         "compile": {
           "lib/net8.0/Avalonia.Remote.Protocol.dll": {
@@ -602,10 +602,10 @@
     }
   },
   "libraries": {
-    "Avalonia/11.3.4": {
-      "sha512": "gWy26+7xDbGOURVUjion2lzqXEMo2+YOjVMhYn7ZGQNAAEjogK5EpVn6KNzeBcLUK+TNulkoZY7tjlHPSY2oFw==",
+    "Avalonia/11.3.11": {
+      "sha512": "N+LjdoGLOD2Rio1JK0VlSMEB2opGZpq8/Vs5LV16eAnbjFeXdqY5uwmURFKb1rJ9McyMZQT3Kf2/DecmKqrLEw==",
       "type": "package",
-      "path": "avalonia/11.3.4",
+      "path": "avalonia/11.3.11",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -613,7 +613,7 @@
         "Icon.png",
         "analyzers/dotnet/cs/Avalonia.Analyzers.dll",
         "analyzers/dotnet/cs/Avalonia.Generators.dll",
-        "avalonia.11.3.4.nupkg.sha512",
+        "avalonia.11.3.11.nupkg.sha512",
         "avalonia.nuspec",
         "build/Avalonia.Generators.props",
         "build/Avalonia.props",
@@ -787,16 +787,17 @@
         "runtimes/win-x86/native/av_libglesv2.dll"
       ]
     },
-    "Avalonia.BuildServices/0.0.31": {
-      "sha512": "KmCN6Hc+45q4OnF10ge450yVUvWuxU6bdQiyKqiSvrHKpahNrEdk0kG6Ip6GHk2SKOCttGQuA206JVdkldEENg==",
+    "Avalonia.BuildServices/11.3.2": {
+      "sha512": "qHDToxto1e3hci5YqbG9n0Ty8mlp3zBUN5wT66wKqaDVzXyQ0do3EnRILd4Ke9jpvsktaPpgE0YjEk7hornryQ==",
       "type": "package",
-      "path": "avalonia.buildservices/0.0.31",
+      "path": "avalonia.buildservices/11.3.2",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
-        "avalonia.buildservices.0.0.31.nupkg.sha512",
+        "README.md",
+        "avalonia.buildservices.11.3.2.nupkg.sha512",
         "avalonia.buildservices.nuspec",
         "build/Avalonia.BuildServices.targets",
         "buildTransitive/Avalonia.BuildServices.targets",
@@ -914,15 +915,15 @@
         "runtimes/osx/native/libAvaloniaNative.dylib"
       ]
     },
-    "Avalonia.Remote.Protocol/11.3.4": {
-      "sha512": "WEb44B/h8uaqsFlHFHbJIUYcOJF1P6fWoVKFmTSpG8oxywl5+oNjJ1K51jL6FYhmzYapWoVq2INaaXMc7qngDA==",
+    "Avalonia.Remote.Protocol/11.3.11": {
+      "sha512": "kooZKlJb0DkzJYFzYTgChqAr+pOBq64FyNuvjpBLBmqTTTj/f+d7XyPvdNFgPsvyY3sa4X/W79t6hQnyWmM4zw==",
       "type": "package",
-      "path": "avalonia.remote.protocol/11.3.4",
+      "path": "avalonia.remote.protocol/11.3.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
-        "avalonia.remote.protocol.11.3.4.nupkg.sha512",
+        "avalonia.remote.protocol.11.3.11.nupkg.sha512",
         "avalonia.remote.protocol.nuspec",
         "lib/net6.0/Avalonia.Remote.Protocol.dll",
         "lib/net6.0/Avalonia.Remote.Protocol.xml",
@@ -1455,7 +1456,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "Avalonia >= 11.3.4",
+      "Avalonia >= 11.3.11",
       "Avalonia.Desktop >= 11.3.4",
       "Avalonia.Diagnostics >= 11.3.4",
       "Avalonia.Fonts.Inter >= 11.3.4",
@@ -1464,24 +1465,32 @@
     ]
   },
   "packageFolders": {
-    "/home/student/.nuget/packages/": {}
+    "C:\\Users\\Даша\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/student/RiderProjects/WebApplication1/AvaloniaApplication2/AvaloniaApplication2.csproj",
+      "projectUniqueName": "C:\\Users\\Даша\\RiderProjects\\WebApplication1\\AvaloniaApplication2\\AvaloniaApplication2.csproj",
       "projectName": "AvaloniaApplication2",
-      "projectPath": "/home/student/RiderProjects/WebApplication1/AvaloniaApplication2/AvaloniaApplication2.csproj",
-      "packagesPath": "/home/student/.nuget/packages/",
-      "outputPath": "/home/student/RiderProjects/WebApplication1/AvaloniaApplication2/obj/",
+      "projectPath": "C:\\Users\\Даша\\RiderProjects\\WebApplication1\\AvaloniaApplication2\\AvaloniaApplication2.csproj",
+      "packagesPath": "C:\\Users\\Даша\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Даша\\RiderProjects\\WebApplication1\\AvaloniaApplication2\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/student/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Даша\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1508,7 +1517,7 @@
         "dependencies": {
           "Avalonia": {
             "target": "Package",
-            "version": "[11.3.4, )"
+            "version": "[11.3.11, )"
           },
           "Avalonia.Desktop": {
             "target": "Package",
@@ -1547,7 +1556,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/student/.dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

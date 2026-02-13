@@ -1437,7 +1437,7 @@
           }
         }
       },
-      "Microsoft.DotNet.ILCompiler/9.0.8": {
+      "Microsoft.DotNet.ILCompiler/9.0.5": {
         "type": "package",
         "build": {
           "build/Microsoft.DotNet.ILCompiler.props": {}
@@ -1748,7 +1748,7 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/9.0.8": {
+      "Microsoft.NET.ILLink.Tasks/9.0.5": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -5036,10 +5036,10 @@
         "microsoft.diasymreader.nuspec"
       ]
     },
-    "Microsoft.DotNet.ILCompiler/9.0.8": {
-      "sha512": "cMwVh5hsxAhv+oMHQdgcXodt2kDpfviofBO4IXupSAHJW2vZOZOOIhvPWRGO6NeGcP8SR4OpSwktRqb0i79KFA==",
+    "Microsoft.DotNet.ILCompiler/9.0.5": {
+      "sha512": "rfDodV68TLSUgVM6ZQusuUXD7GAIqwCKJWlPtfsd99iLlLbeGfqUQE7Xo8xLa1ju5GCdSBO0q35suzZ8ppclpA==",
       "type": "package",
-      "path": "microsoft.dotnet.ilcompiler/9.0.8",
+      "path": "microsoft.dotnet.ilcompiler/9.0.5",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -5058,7 +5058,7 @@
         "build/NativeAOT.natvis",
         "build/WindowsAPIs.txt",
         "build/findvcvarsall.bat",
-        "microsoft.dotnet.ilcompiler.9.0.8.nupkg.sha512",
+        "microsoft.dotnet.ilcompiler.9.0.5.nupkg.sha512",
         "microsoft.dotnet.ilcompiler.nuspec",
         "runtime.json",
         "tools/netstandard/ILCompiler.Build.Tasks.deps.json",
@@ -5502,10 +5502,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/9.0.8": {
-      "sha512": "rd1CbIsMtVPtZNTIVD6Xydue//klYOOQIDpRgu3BHtv17AlpRs74/6QFbcYgMm/jL+naVU2T3OFLxVSLV5lQLQ==",
+    "Microsoft.NET.ILLink.Tasks/9.0.5": {
+      "sha512": "4L7wbb3Y4BJgIeSnmAf/C6S/qCs9rT1b0dX72uj3qo0qvUH7D0U1tU5ZlC7A3Wb8E/dXK4caOi4JkdLTVJaXhw==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/9.0.8",
+      "path": "microsoft.net.illink.tasks/9.0.5",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -5519,7 +5519,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.9.0.8.nupkg.sha512",
+        "microsoft.net.illink.tasks.9.0.5.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -7128,32 +7128,40 @@
   "projectFileDependencyGroups": {
     "net9.0": [
       "Avalonia.Controls.DataGrid >= 11.3.11",
-      "Microsoft.DotNet.ILCompiler >= 9.0.8",
+      "Microsoft.DotNet.ILCompiler >= 9.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.12",
-      "Microsoft.NET.ILLink.Tasks >= 9.0.8",
+      "Microsoft.NET.ILLink.Tasks >= 9.0.5",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 9.0.12",
       "Pomelo.EntityFrameworkCore.MySql >= 9.0.0"
     ]
   },
   "packageFolders": {
-    "/home/student/.nuget/packages/": {}
+    "C:\\Users\\Даша\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/student/RiderProjects/WebApplication1/WebApplication1/WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\Даша\\RiderProjects\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "/home/student/RiderProjects/WebApplication1/WebApplication1/WebApplication1.csproj",
-      "packagesPath": "/home/student/.nuget/packages/",
-      "outputPath": "/home/student/RiderProjects/WebApplication1/WebApplication1/obj/",
+      "projectPath": "C:\\Users\\Даша\\RiderProjects\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+      "packagesPath": "C:\\Users\\Даша\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Даша\\RiderProjects\\WebApplication1\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/home/student/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Даша\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -7185,7 +7193,7 @@
           "Microsoft.DotNet.ILCompiler": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[9.0.8, )",
+            "version": "[9.0.5, )",
             "autoReferenced": true
           },
           "Microsoft.EntityFrameworkCore.Design": {
@@ -7197,7 +7205,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[9.0.8, )",
+            "version": "[9.0.5, )",
             "autoReferenced": true
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
@@ -7222,8 +7230,8 @@
         "warn": true,
         "downloadDependencies": [
           {
-            "name": "runtime.linux-x64.Microsoft.DotNet.ILCompiler",
-            "version": "[9.0.8, 9.0.8]"
+            "name": "runtime.win-x64.Microsoft.DotNet.ILCompiler",
+            "version": "[9.0.5, 9.0.5]"
           }
         ],
         "frameworkReferences": {
@@ -7234,7 +7242,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/student/.dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
