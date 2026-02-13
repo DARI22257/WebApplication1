@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="AvaloniaApplication2/App.axaml" value="AvaloniaApplication2/AvaloniaApplication2.csproj" />
+        <entry key="AvaloniaApplication2/Views/EmployeeEditorWindow.axaml" value="AvaloniaApplication2/AvaloniaApplication2.csproj" />
         <entry key="AvaloniaApplication2/Views/EmployeesView.axaml" value="AvaloniaApplication2/AvaloniaApplication2.csproj" />
         <entry key="AvaloniaApplication2/Views/LoginWindow.axaml" value="AvaloniaApplication2/AvaloniaApplication2.csproj" />
         <entry key="AvaloniaApplication2/Views/MainWindow.axaml" value="AvaloniaApplication2/AvaloniaApplication2.csproj" />
