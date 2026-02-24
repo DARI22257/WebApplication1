@@ -5,7 +5,3 @@ Accept: application/json
 
 ###
 
-GET {{WebApplication1_HostAddress}}/todos/1
-Accept: application/json
-
-###

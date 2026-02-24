@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.DB;
 using WebApplication1.DTO;
+using WebApplication1.Tools;
 
 namespace WebApplication1.Controllers;
 
@@ -17,6 +18,7 @@ public class AuthController : ControllerBase
     private readonly _1135ChubrikContext _db;
     private readonly IConfiguration _cfg;
 
+    public _1135ChubrikContext db { get; set; }
     public AuthController(_1135ChubrikContext db, IConfiguration cfg)
     {
         _db = db;
@@ -24,24 +26,45 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<TokenResponse>> Login([FromBody] LoginRequest req)
+    public async Task<ActionResult<TokenResponse>> Login([FromBody] LoginRequest request)
     {
-        if (string.IsNullOrWhiteSpace(req.Username) || string.IsNullOrWhiteSpace(req.Password))
-            return BadRequest("Username/password required");
-
-        var cred = await _db.Credentials.FirstOrDefaultAsync(c => c.Username == req.Username);
-        if (cred == null) return Unauthorized();
-
-
-        if (cred.PasswordHash != req.Password)
+        var credential = await db.Credentials.Include(x => x.Role)
+            .FirstOrDefaultAsync(c => c.Username == request.Username);
+        if (credential == null)
             return Unauthorized();
 
-        var employee = await _db.Employees.FirstOrDefaultAsync(e => e.Id == cred.Employeeid);
-        if (employee == null) return Unauthorized();
+        bool isValidPassword = BCrypt.Net.BCrypt.Verify(
+            request.Password,
+            credential.PasswordHash
+        );
 
-        var token = CreateJwt(employee.Id, cred.Role);
+        if (!isValidPassword)
+            return Unauthorized();
 
-        return Ok(new TokenResponse { Token = token, ExpiresIn = 3600 });
+        var claims = new[]
+        {
+            new Claim(ClaimTypes.Name, credential.Username),
+            new Claim(ClaimTypes.Role, credential.Role),
+            new Claim("EmployeeId", credential.Employeeid.ToString()),
+        };
+
+        var key = JwtSettings.GetSymmetricSecurityKey();
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var expirensIn = 3600;
+
+        var toker = new JwtSecurityToken(
+            issuer: JwtSettings.ISSUER,
+            audience: JwtSettings.AUDIENCE,
+            claims: claims,
+            expires: DateTime.UtcNow.AddSeconds(expirensIn),
+            signingCredentials: creds
+        );
+        return Ok(new TokenResponse()
+        {
+            Token = new JwtSecurityTokenHandler().WriteToken(toker),
+            ExpiresIn = expirensIn
+        });
     }
 
     [Authorize]
@@ -72,29 +95,27 @@ public class AuthController : ControllerBase
         });
     }
 
-    private string CreateJwt(int employeeId, string role)
+    [HttpPost]
+    public ActionResult<string> Post(LoginRequest value)
     {
-        var key = _cfg["Jwt:Key"] ?? "DEV_SUPER_SECRET_KEY_1234567890";
-        var issuer = _cfg["Jwt:Issuer"] ?? "WebApplication1";
-        var audience = _cfg["Jwt:Audience"] ?? "WebApplication1Client";
-
-        var claims = new List<Claim>
+        if (value.Username == "1" && value.Password == "2")
         {
-            new("EmployeeId", employeeId.ToString()),
-            new(ClaimTypes.Role, string.IsNullOrWhiteSpace(role) ? "User" : role)
-        };
-
-        var creds = new SigningCredentials(
-            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
-            SecurityAlgorithms.HmacSha256);
-
-        var jwt = new JwtSecurityToken(
-            issuer: issuer,
-            audience: audience,
-            claims: claims,
-            expires: DateTime.UtcNow.AddHours(1),
-            signingCredentials: creds);
-
-        return new JwtSecurityTokenHandler().WriteToken(jwt);
+            List<Claim> claims = new();
+            claims.Add(new Claim(ClaimTypes.PrimarySid, "asfas1315135315"));
+            var jwt = new JwtSecurityToken(
+                JwtSettings.ISSUER,
+                JwtSettings.AUDIENCE, 
+                claims, 
+                null, 
+                DateTime.UtcNow.AddMinutes(30),
+                new SigningCredentials(JwtSettings.GetSymmetricSecurityKey(),
+                    SecurityAlgorithms.HmacSha256));
+            string token = new JwtSecurityTokenHandler().WriteToken(jwt);
+            return Ok(token);
+        }
+        else
+        {
+            return Forbid();
+        }
     }
 }

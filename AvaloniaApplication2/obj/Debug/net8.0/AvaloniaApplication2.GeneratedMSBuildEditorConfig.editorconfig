@@ -15,29 +15,29 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AvaloniaApplication2
-build_property.ProjectDir = C:\Users\Даша\RiderProjects\WebApplication1\AvaloniaApplication2\
+build_property.ProjectDir = /home/student/RiderProjects/WebApplication8/AvaloniaApplication2/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Даша/RiderProjects/WebApplication1/AvaloniaApplication2/App.axaml]
+[/home/student/RiderProjects/WebApplication8/AvaloniaApplication2/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/Даша/RiderProjects/WebApplication1/AvaloniaApplication2/Views/EmployeeEditorWindow.axaml]
+[/home/student/RiderProjects/WebApplication8/AvaloniaApplication2/Views/EmployeeEditorWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/Даша/RiderProjects/WebApplication1/AvaloniaApplication2/Views/EmployeesView.axaml]
+[/home/student/RiderProjects/WebApplication8/AvaloniaApplication2/Views/EmployeesView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/Даша/RiderProjects/WebApplication1/AvaloniaApplication2/Views/LoginWindow.axaml]
+[/home/student/RiderProjects/WebApplication8/AvaloniaApplication2/Views/LoginWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/Даша/RiderProjects/WebApplication1/AvaloniaApplication2/Views/MainWindow.axaml]
+[/home/student/RiderProjects/WebApplication8/AvaloniaApplication2/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/Даша/RiderProjects/WebApplication1/AvaloniaApplication2/Views/ShiftEditorWindow.axaml]
+[/home/student/RiderProjects/WebApplication8/AvaloniaApplication2/Views/ShiftEditorWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/Даша/RiderProjects/WebApplication1/AvaloniaApplication2/Views/ShiftsView.axaml]
+[/home/student/RiderProjects/WebApplication8/AvaloniaApplication2/Views/ShiftsView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
