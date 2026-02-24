@@ -12,10 +12,9 @@ namespace AvaloniaApplication2.ViewModels;
 
 public class EmployeesViewModel : BaseVM
 {
-    private readonly ApiService api;
+    private readonly ApiService _api;
 
     public ObservableCollection<EmployeeDto> Employees { get; } = new();
-    
 
     private EmployeeDto? _selectedEmployee;
     public EmployeeDto? SelectedEmployee
@@ -28,47 +27,45 @@ public class EmployeesViewModel : BaseVM
             DeleteEmployeeCommand.RaiseCanExecuteChanged();
         }
     }
+
     public RelayCommand AddEmployeeCommand { get; }
     public RelayCommand EditEmployeeCommand { get; }
     public RelayCommand DeleteEmployeeCommand { get; }
 
     public EmployeesViewModel(ApiService api)
     {
-        this.api = api;
+        _api = api;
 
         AddEmployeeCommand = new RelayCommand(async () => await AddEmployee());
         EditEmployeeCommand = new RelayCommand(async () => await EditEmployee(), () => SelectedEmployee != null);
-        DeleteEmployeeCommand = new RelayCommand(async () => await DeleteEmployee(), () => SelectedEmployee != null); 
-        LoadEmployees();
+        DeleteEmployeeCommand = new RelayCommand(async () => await DeleteEmployee(), () => SelectedEmployee != null);
+
+        _ = LoadEmployeesAsync();
     }
 
-
-    private async void LoadEmployees()
+    public async Task LoadEmployeesAsync()
     {
         try
         {
             Employees.Clear();
-            var list = await api.GetEmployeesAsync();
-
-            Console.WriteLine("Employees count: " + list?.Count);
-
+            var list = await _api.GetEmployeesAsync();
             foreach (var emp in list)
-                Employees.Add(emp.Employee);
+                Employees.Add(emp);
         }
         catch (Exception ex)
         {
             Console.WriteLine("Ошибка загрузки сотрудников: " + ex);
         }
     }
-    
+
     private async Task AddEmployee()
     {
-        var editor = new EmployeeEditorWindow(api);
-        var parentWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-        if (parentWindow != null)
+        var editor = new EmployeeEditorWindow(_api);
+        var parent = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+        if (parent != null)
         {
-            var result = await editor.ShowDialog<bool>(parentWindow);
-            if (result) LoadEmployees();
+            var result = await editor.ShowDialog<bool>(parent);
+            if (result) await LoadEmployeesAsync();
         }
     }
 
@@ -76,24 +73,19 @@ public class EmployeesViewModel : BaseVM
     {
         if (SelectedEmployee == null) return;
 
-        var employeeWithRole = await api.GetEmployeesAsync(SelectedEmployee.Id);
-
-        var editor = new EmployeeEditorWindow(api, employeeWithRole);
-
-        var parentWindow = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
-        if (parentWindow != null)
+        var editor = new EmployeeEditorWindow(_api, SelectedEmployee);
+        var parent = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+        if (parent != null)
         {
-            var result = await editor.ShowDialog<bool>(parentWindow);
-            if (result) LoadEmployees();
+            var result = await editor.ShowDialog<bool>(parent);
+            if (result) await LoadEmployeesAsync();
         }
     }
-
 
     private async Task DeleteEmployee()
     {
         if (SelectedEmployee == null) return;
-        await api.DeleteEmployeeAsync(SelectedEmployee.Id);
-        LoadEmployees();
+        await _api.DeleteEmployeeAsync(SelectedEmployee.Id);
+        await LoadEmployeesAsync();
     }
-    
 }

@@ -8,9 +8,10 @@ using AvaloniaApplication2.Tools;
 using AvaloniaApplication2.Views;
 
 namespace AvaloniaApplication2.ViewModels;
+
 public class ShiftsViewModel : BaseVM
 {
-    private readonly ApiService api;
+    private readonly ApiService _api;
 
     public ObservableCollection<ShiftDto> Shifts { get; } = new();
     public ObservableCollection<EmployeeDto> Employees { get; } = new();
@@ -44,7 +45,7 @@ public class ShiftsViewModel : BaseVM
 
     public ShiftsViewModel(ApiService api)
     {
-        this.api = api;
+        _api = api;
 
         AddShiftCommand = new RelayCommand(async () => await AddShift());
         EditShiftCommand = new RelayCommand(async () => await EditShift(), () => SelectedShift != null);
@@ -57,9 +58,9 @@ public class ShiftsViewModel : BaseVM
     public async Task LoadEmployeesAsync()
     {
         Employees.Clear();
-        var list = await api.GetEmployeesAsync();
+        var list = await _api.GetEmployeesAsync();
         foreach (var e in list)
-            Employees.Add(e.Employee);
+            Employees.Add(e);
     }
 
     public async Task LoadShiftsAsync()
@@ -67,12 +68,13 @@ public class ShiftsViewModel : BaseVM
         try
         {
             Shifts.Clear();
-            var list = await api.GetShiftsAsync();
 
-            Console.WriteLine("Shifts count: " + list?.Count);
-            
+            var list = FilterEmployee == null
+                ? await _api.GetShiftsAsync()
+                : await _api.GetShiftsByEmployeeAsync(FilterEmployee.Id);
 
-
+            foreach (var s in list)
+                Shifts.Add(s);
         }
         catch (Exception ex)
         {
@@ -82,7 +84,7 @@ public class ShiftsViewModel : BaseVM
 
     private async Task AddShift()
     {
-        var editor = new ShiftEditorWindow(api);
+        var editor = new ShiftEditorWindow(_api);
         var parent = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
         if (parent != null)
         {
@@ -95,7 +97,7 @@ public class ShiftsViewModel : BaseVM
     {
         if (SelectedShift == null) return;
 
-        var editor = new ShiftEditorWindow(api, SelectedShift);
+        var editor = new ShiftEditorWindow(_api, SelectedShift);
         var parent = (App.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
         if (parent != null)
         {
@@ -108,7 +110,7 @@ public class ShiftsViewModel : BaseVM
     {
         if (SelectedShift == null) return;
 
-        await api.DeleteShiftAsync(SelectedShift.Id);
+        await _api.DeleteShiftAsync(SelectedShift.Id);
         await LoadShiftsAsync();
     }
 }

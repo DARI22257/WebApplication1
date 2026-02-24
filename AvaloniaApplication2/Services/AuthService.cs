@@ -14,11 +14,15 @@ public class AuthService
         Directory.CreateDirectory(dir);
         _path = Path.Combine(dir, "token.txt");
     }
-
-    public Task SaveTokenAsync(string token)
+    public Task SaveTokenAsync(string? token)
     {
         File.WriteAllText(_path, token ?? "");
         return Task.CompletedTask;
+    }
+
+    public Task SaveTokenAsync(string? token, bool rememberMe)
+    {
+        return SaveTokenAsync(token);
     }
 
     public Task<string?> GetTokenAsync()

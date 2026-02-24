@@ -1,79 +1,37 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AvaloniaApplication2.Services;
 using AvaloniaApplication2.Tools;
-using CommunityToolkit.Mvvm.ComponentModel;
-using RelayCommand = CommunityToolkit.Mvvm.Input.RelayCommand;
+using AvaloniaApplication2.Views;
 
 namespace AvaloniaApplication2.ViewModels;
 
-public class MainViewModel : BaseVM
+public class MainWindowViewModel : BaseVM
 {
-    private readonly ApiService api;
-    private readonly AuthService auth;
+    private readonly ApiService _api;
+    private readonly AuthService _auth;
 
-    public EmployeesViewModel EmployeesView { get; }
-    public ShiftsViewModel ShiftsView { get; }
-
-    private string _currentUser = "";
-
-    public string CurrentUser
-    {
-        get => _currentUser;
-        private set => SetField(ref _currentUser, value);
-    }
-
-    private string _currentRole = "";
-
-    public string CurrentRole
-    {
-        get => _currentRole;
-        private set => SetField(ref _currentRole, value);
-    }
-
+    public RelayCommand OpenEmployeesCommand { get; }
+    public RelayCommand OpenShiftsCommand { get; }
     public RelayCommand LogoutCommand { get; }
 
-    public MainViewModel(ApiService api, AuthService auth)
+    public MainWindowViewModel(ApiService api, AuthService auth)
     {
-        this.api = api;
-        this.auth = auth;
+        _api = api;
+        _auth = auth;
 
-        EmployeesView = new EmployeesViewModel(this.api);
-        ShiftsView = new ShiftsViewModel(this.api);
+        OpenEmployeesCommand = new RelayCommand(() =>
+            new EmployeesView(_api).Show());
 
-        LogoutCommand = new RelayCommand(Logout);
+        OpenShiftsCommand = new RelayCommand(() =>
+            new ShiftsView(_api).Show());
 
-        LoadProfile().ContinueWith(task =>
-        {
-            if (task.Exception != null)
-            {
-                Console.WriteLine("Ошибка при загрузке профиля: " + task.Exception);
-            }
-        });
+        LogoutCommand = new RelayCommand(() =>
+            _ = LogoutAsync());
     }
 
-    private async Task LoadProfile()
+    private async Task LogoutAsync()
     {
-        try
-        {
-            var profile = await api.GetProfileAsync();
-
-
-            CurrentUser = profile?.Employee != null
-                ? $"{profile.Employee.FirstName} {profile.Employee.LastName}"
-                : "Нет данных";
-            CurrentRole = profile?.Role?.Title ?? "Нет данных";
-        }
-        catch (Exception ex)
-        {
-            CurrentUser = "Ошибка";
-            CurrentRole = "Ошибка";
-        }
-    }
-
-    private async void Logout()
-    {
-        await auth.ClearTokenAsync();
-        NavigationService.OpenLogin(api, auth);
+        await _auth.ClearTokenAsync();
+        NavigationService.OpenLogin(_api, _auth);
     }
 }

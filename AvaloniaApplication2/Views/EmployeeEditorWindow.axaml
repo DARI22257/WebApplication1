@@ -1,9 +1,24 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:vm="clr-namespace:AvaloniaApplication2.ViewModels"
         x:Class="AvaloniaApplication2.Views.EmployeeEditorWindow"
-        Title="EmployeeEditorWindow">
-    Welcome to Avalonia!
+        x:DataType="vm:EmployeeEditorViewModel"
+        Width="420" Height="360"
+        Title="Сотрудник">
+
+    <StackPanel Margin="20" Spacing="10">
+        <TextBox Watermark="Имя" Text="{Binding Employee.FirstName}" />
+        <TextBox Watermark="Фамилия" Text="{Binding Employee.LastName}" />
+        <TextBox Watermark="Должность" Text="{Binding Employee.Position}" />
+
+        <TextBlock Text="Дата найма:"/>
+        <DatePicker SelectedDate="{Binding Employee.HireDate}" />
+
+        <CheckBox Content="Активен" IsChecked="{Binding Employee.IsActive}"/>
+
+        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Сохранить" Command="{Binding SaveCommand}"/>
+            <Button Content="Отмена" Command="{Binding CancelCommand}"/>
+        </StackPanel>
+    </StackPanel>
 </Window>

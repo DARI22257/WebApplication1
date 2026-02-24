@@ -9,19 +9,34 @@ namespace AvaloniaApplication2.ViewModels;
 
 public class ShiftEditorViewModel : BaseVM
 {
-    private readonly ApiService api;
-    private readonly bool isEdit;
+    private readonly ApiService _api;
+    private readonly bool _isEdit;
 
-    public ShiftDto Shift { get; set; }
-
+    public ShiftDto Shift { get; }
     public ObservableCollection<EmployeeDto> Employees { get; } = new();
 
     public RelayCommand SaveCommand { get; }
+    public RelayCommand CancelCommand { get; }
 
+    public event Action<bool>? CloseRequested;
+
+    private EmployeeDto? _selectedEmployee;
+    public EmployeeDto? SelectedEmployee
+    {
+        get => _selectedEmployee;
+        set
+        {
+            if (!SetField(ref _selectedEmployee, value)) return;
+            if (value != null)
+                Shift.EmployeeId = value.Id;
+        }
+    }
     public ShiftEditorViewModel(ApiService api, ShiftDto? shift = null)
     {
-        this.api = api;
-        isEdit = shift != null;
+
+
+        _api = api;
+        _isEdit = shift != null;
 
         Shift = shift != null
             ? new ShiftDto
@@ -34,46 +49,46 @@ public class ShiftEditorViewModel : BaseVM
             }
             : new ShiftDto
             {
-                StartDateTime = DateTime.Now,
-                EndDateTime = DateTime.Now.AddHours(1)
+                StartDateTime = DateTimeOffset.Now,
+                EndDateTime = DateTimeOffset.Now.AddHours(1),
+                Description = ""
             };
 
         SaveCommand = new RelayCommand(async () => await SaveAsync());
+        CancelCommand = new RelayCommand(() => CloseRequested?.Invoke(false));
 
-        LoadEmployees();
+        _ = LoadEmployeesAsync();
     }
 
-    private async void LoadEmployees()
+    private async Task LoadEmployeesAsync()
     {
         Employees.Clear();
-        var list = await api.GetEmployeesAsync();
-        foreach (var emp in list)
-            Employees.Add(emp.Employee);
+        var list = await _api.GetEmployeesAsync();
+        foreach (var e in list)
+            Employees.Add(e);
+
+        if (!_isEdit && Employees.Count > 0 && Shift.EmployeeId == 0)
+            Shift.EmployeeId = Employees[0].Id;
     }
 
     private async Task SaveAsync()
     {
-        if (isEdit)
-            await api.UpdateShiftAsync(Shift.Id, Shift);
-        else
-            await api.CreateShiftAsync(Shift);
-
-        CloseWindow(true);
-    }
-
-    private void CloseWindow(bool result)
-    {
-        if (App.Current.ApplicationLifetime is
-            Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
+        try
         {
-            foreach (var w in desktop.Windows)
+            if (_isEdit)
             {
-                if (w.DataContext == this)
-                {
-                    w.Close(result);
-                    break;
-                }
+                var ok = await _api.UpdateShiftAsync(Shift.Id, Shift);
+                CloseRequested?.Invoke(ok);
             }
+            else
+            {
+                var created = await _api.CreateShiftAsync(Shift);
+                CloseRequested?.Invoke(created != null);
+            }
+        }
+        catch
+        {
+            CloseRequested?.Invoke(false);
         }
     }
 }

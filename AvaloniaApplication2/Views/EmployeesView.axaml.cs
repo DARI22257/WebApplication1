@@ -2,14 +2,17 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using AvaloniaApplication2.Services;
+using AvaloniaApplication2.ViewModels;
 
 namespace AvaloniaApplication2.Views;
 
 public partial class EmployeesView : Window
 {
-    public EmployeesView()
+    public EmployeesView(ApiService api)
     {
         InitializeComponent();
+        DataContext = new EmployeesViewModel(api);
     }
     
 

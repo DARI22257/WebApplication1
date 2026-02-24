@@ -1,7 +1,8 @@
 ﻿namespace WebApplication1.DTO;
 
+
 public class EmployeeRoleDTO
 {
-    public EmployeeDTO EmployeeDto { get; set; }
-    
-    public RoleDto RoleDto { get; set; }}
+    public EmployeeDTO EmployeeDto { get; set; } = new();
+    public RoleDto RoleDto { get; set; } = new();
+}

@@ -8,13 +8,17 @@
         Title="LoginWindow"
         x:DataType="viewModels:LoginViewModel">
         
-        <StackPanel>
-                <TextBlock Text="Вход в систему" HorizontalAlignment="Center"></TextBlock>
-                <TextBox Watermark="Логин" Text="{Binding Username}" ></TextBox>
-                <TextBox Watermark="Пароль" Text="{Binding Password}"></TextBox>
-                <Button Content="Войти" ></Button>
-                
-                
+        <StackPanel Margin="20" Spacing="10">
+                <TextBlock Text="Вход в систему" FontSize="18" HorizontalAlignment="Center"/>
+
+                <TextBox Watermark="Логин" Text="{Binding Username}" />
+                <TextBox Watermark="Пароль" Text="{Binding Password}" PasswordChar="*"/>
+
+                <CheckBox Content="Запомнить меня" IsChecked="{Binding RememberMe}"/>
+
+                <Button Content="Войти" Command="{Binding LoginCommand}" />
+
+                <TextBlock Text="{Binding ErrorMessage}" Foreground="Red" TextWrapping="Wrap"/>
         </StackPanel>
     
 </Window>

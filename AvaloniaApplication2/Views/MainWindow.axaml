@@ -10,5 +10,10 @@
         Title="AvaloniaApplication2">
 
 
-
+        <StackPanel Margin="20" Spacing="10">
+                <TextBlock Text="Панель управления" FontSize="18" />
+                <Button Content="Сотрудники" Command="{Binding OpenEmployeesCommand}" />
+                <Button Content="Смены" Command="{Binding OpenShiftsCommand}" />
+                <Button Content="Выйти" Command="{Binding LogoutCommand}" />
+        </StackPanel>
 </Window>

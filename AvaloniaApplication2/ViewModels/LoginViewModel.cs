@@ -3,79 +3,75 @@ using System.Threading.Tasks;
 using AvaloniaApplication2.Models;
 using AvaloniaApplication2.Services;
 using AvaloniaApplication2.Tools;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using RelayCommand = CommunityToolkit.Mvvm.Input.RelayCommand;
-
 
 namespace AvaloniaApplication2.ViewModels;
 
 public class LoginViewModel : BaseVM
 {
-    private readonly ApiService api;
-    private readonly AuthService auth;
+    private readonly ApiService _api;
+    private readonly AuthService _auth;
 
     private string _username = "";
-    public string Username
-    {
-        get => _username;
-        set => SetField(ref _username, value);
-    }
+    public string Username { get => _username; set => SetField(ref _username, value); }
 
     private string _password = "";
-    public string Password
-    {
-        get => _password;
-        set => SetField(ref _password, value);
-    }
+    public string Password { get => _password; set => SetField(ref _password, value); }
 
-    private bool _rememberMe = false;
-    public bool RememberMe
-    {
-        get => _rememberMe;
-        set => SetField(ref _rememberMe, value);
-    }
+    private bool _rememberMe;
+    public bool RememberMe { get => _rememberMe; set => SetField(ref _rememberMe, value); }
 
     private string _errorMessage = "";
-    public string ErrorMessage
-    {
-        get => _errorMessage;
-        set => SetField(ref _errorMessage, value);
-    }
+    public string ErrorMessage { get => _errorMessage; set => SetField(ref _errorMessage, value); }
 
     public RelayCommand LoginCommand { get; }
 
     public LoginViewModel(ApiService api, AuthService auth)
     {
-        this.api = api;
-        this.auth = auth;
+        _api = api;
+        _auth = auth;
 
         LoginCommand = new RelayCommand(async () => await LoginAsync());
+        _api.OnUnauthorized += () =>
+        {
+            _ = _auth.ClearTokenAsync();
+            NavigationService.OpenLogin(_api, _auth);
+        };
     }
 
     private async Task LoginAsync()
     {
-        ErrorMessage = "";
         try
         {
-            var response = await api.LoginAsync(new LoginRequest
+            ErrorMessage = "";
+
+            var resp = await _api.LoginAsync(new LoginRequest
             {
-                Username = this.Username,
-                Password = this.Password
+                Username = Username,
+                Password = Password
             });
 
-            await auth.SaveTokenAsync(response.Token, RememberMe);
+            if (resp == null || string.IsNullOrWhiteSpace(resp.Token))
+            {
+                ErrorMessage = "Неверный логин или пароль";
+                return;
+            }
 
-            NavigationService.OpenMain(api, auth);
+            await _auth.SaveTokenAsync(resp.Token, RememberMe);
+
+            // проверим профиль (если токен битый — вернётся null)
+            var profile = await _api.GetProfileAsync();
+            if (profile == null)
+            {
+                ErrorMessage = "Не удалось получить профиль (проверь сервер/токен)";
+                await _auth.ClearTokenAsync();
+                return;
+            }
+
+            NavigationService.OpenMain(_api, _auth);
         }
-        catch (ApiException ex) when (ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+        catch (Exception ex)
         {
-            ErrorMessage = "Неверный логин или пароль";
-        }
-        catch (Exception e)
-        {
-            ErrorMessage = e.Message;
+            ErrorMessage = "Ошибка входа: " + ex.Message;
         }
     }
-
 }

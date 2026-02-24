@@ -21,7 +21,7 @@ public class ApiService
         _auth = auth;
         _http = new HttpClient
         {
-            BaseAddress = new Uri("Нужен Apiiiiii") 
+            BaseAddress = new Uri("http://localhost:5235/") 
         };
     }
 
