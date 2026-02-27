@@ -1,30 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/home/student/RiderProjects/WebApplication8/WebApplication1/WebApplication1.csproj": {}
+    "/home/student/RiderProjects/WebApplication9/WebApplication1/WebApplication1.csproj": {}
   },
   "projects": {
-    "/home/student/RiderProjects/WebApplication8/WebApplication1/WebApplication1.csproj": {
+    "/home/student/RiderProjects/WebApplication9/WebApplication1/WebApplication1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/student/RiderProjects/WebApplication8/WebApplication1/WebApplication1.csproj",
+        "projectUniqueName": "/home/student/RiderProjects/WebApplication9/WebApplication1/WebApplication1.csproj",
         "projectName": "WebApplication1",
-        "projectPath": "/home/student/RiderProjects/WebApplication8/WebApplication1/WebApplication1.csproj",
+        "projectPath": "/home/student/RiderProjects/WebApplication9/WebApplication1/WebApplication1.csproj",
         "packagesPath": "/home/student/.nuget/packages/",
-        "outputPath": "/home/student/RiderProjects/WebApplication8/WebApplication1/obj/",
+        "outputPath": "/home/student/RiderProjects/WebApplication9/WebApplication1/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/student/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net9.0"
+          "net8.0"
         ],
         "sources": {
+          "/home/student/.nuget/packages/": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -41,12 +42,12 @@
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Avalonia.Controls.DataGrid": {
               "target": "Package",
-              "version": "[11.3.11, )"
+              "version": "[11.3.12, )"
             },
             "BCrypt.Net-Next": {
               "target": "Package",
@@ -54,23 +55,23 @@
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[8.0.23, )"
+              "version": "[8.0.24, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[10.0.3, )"
+              "version": "[8.0.24, )"
             },
             "Microsoft.DotNet.ILCompiler": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.13, )",
+              "version": "[9.0.8, )",
               "autoReferenced": true
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.12, )"
+              "version": "[8.0.24, )"
             },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
@@ -79,12 +80,12 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.13, )",
+              "version": "[8.0.19, )",
               "autoReferenced": true
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[9.0.12, )"
+              "version": "[8.0.23, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
@@ -92,7 +93,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[10.1.4, )"
+              "version": "[8.1.4, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
@@ -113,7 +114,7 @@
           "downloadDependencies": [
             {
               "name": "runtime.linux-x64.Microsoft.DotNet.ILCompiler",
-              "version": "[9.0.13, 9.0.13]"
+              "version": "[9.0.8, 9.0.8]"
             }
           ],
           "frameworkReferences": {
@@ -124,7 +125,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/home/student/.dotnet/sdk/9.0.311/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/student/.dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

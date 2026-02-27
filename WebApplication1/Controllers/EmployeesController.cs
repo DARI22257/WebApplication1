@@ -27,7 +27,8 @@ public class EmployeesController : ControllerBase
                 LastName = e.LastName,
                 Position = e.Position,
                 HireDate = e.HireDate,
-                IsActive = e.IsActive
+                IsActive = e.IsActive,
+                
             })
             .ToListAsync();
 
@@ -35,22 +36,43 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<EmployeeDTO>> Create([FromBody] EmployeeDTO dto)
+    public  async Task<ActionResult> AddEmployee([FromBody]CreateEmployeeDto employeeCred)
     {
-        var e = new Employee
+        
+        if (await _db.Credentials.FirstOrDefaultAsync(x => x.Username == employeeCred.ProfileDto.Username) != null)
+            return BadRequest("Username already exists");
+        
+        Employee employee = new Employee
         {
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            Position = dto.Position,
-            HireDate = dto.HireDate,
-            IsActive = dto.IsActive
-        };
-
-        _db.Employees.Add(e);
+            FirstName = employeeCred.EmployeeDto.FirstName,
+            LastName = employeeCred.EmployeeDto.LastName,
+            Position = employeeCred.EmployeeDto.Position,
+            HireDate = employeeCred.EmployeeDto.HireDate,
+            IsActive = employeeCred.EmployeeDto.IsActive,
+        }; 
+       _db.Employees.Add(employee);
         await _db.SaveChangesAsync();
-
-        dto.Id = e.Id;
-        return Ok(dto);
+        
+        Credential credential = new Credential
+        {
+            Username = employeeCred.ProfileDto.Username,
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword(employeeCred.ProfileDto.PasswordHash),
+            RoleId = employeeCred.ProfileDto.RoleId,
+            EmployeeId = employee.Id,
+        };
+        _db.Credentials.Add(credential);
+        await db.SaveChangesAsync();
+        
+        CredentialDTO credentialDto = new CredentialDTO()
+        {
+            Id =  credential.Id,
+            Username = credential.Username,
+            PasswordHash = credential.PasswordHash,
+            RoleId = credential.RoleId,
+            EmployeeId = credential.EmployeeId,
+        };
+        
+        return Created($"", credentialDto);
     }
 
     [HttpPut("{id:int}")]

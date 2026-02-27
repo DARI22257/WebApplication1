@@ -9,6 +9,7 @@ public partial class _1135ChubrikContext : DbContext
 {
     public _1135ChubrikContext()
     {
+        
     }
 
     public _1135ChubrikContext(DbContextOptions<_1135ChubrikContext> options)
@@ -23,7 +24,7 @@ public partial class _1135ChubrikContext : DbContext
     public virtual DbSet<Shift> Shifts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseMySql("server=192.168.200.13;user=student;password=student;database=1135_Chubrik", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.3.39-mariadb"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

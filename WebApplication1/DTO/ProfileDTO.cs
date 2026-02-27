@@ -3,8 +3,11 @@
 public class ProfileDTO
 {
     public int Id { get; set; }
-    public string FirstName { get; set; } = "";
-    public string LastName { get; set; } = "";
-    public string Position { get; set; } = "";
-    public string Role { get; set; } = "";
+    public int EmployeeId { get; set; }
+    
+    public string Username { get; set; } = null!;
+
+    public string PasswordHash { get; set; } = null!;
+
+    public int RoleId { get; set; }
 }
